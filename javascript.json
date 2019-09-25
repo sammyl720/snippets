@@ -1,0 +1,121 @@
+{
+    "Axios Request": {
+        "prefix": "axreq",
+        "body": [
+            "axios.${1|get,put,post,delete|}('${2:url}')",
+            ".then(res => console.log(res.data))",
+            ".catch(err => console.log(err))"
+        ],
+        "description": "Axios Request"
+    },
+    "Console Log": {
+        "prefix": "cl",
+        "body": "console.log($1)$2",
+        "description": "console log"
+    },
+    "Named function": {
+        "prefix": "nfn",
+        "body": [
+            "function ${1:functionName}($2){",
+            "  $3",
+            "}",
+            "  "
+        ],
+        "description": "Named function"
+    },
+    "Arrow function": {
+        "prefix": "arfn",
+        "body": [
+            "const ${1:functionName} = ($2) => {",
+            "  $3",
+            "}"
+        ],
+        "description": "Arrow function"
+    },
+    "Arrow Method": {
+        "prefix": "arrmth",
+        "body": [
+            "${1|forEach,map,filter,reduce,some|}((${2:item}) => {",
+            "  $3",
+            "})"
+        ],
+        "description": "Arrow Method"
+    },
+    "Express App boilerplate": {
+        "prefix": "exapp",
+        "body": ["const express = require('express')",
+            "const app = express()",
+            "",
+            "$BLOCK_COMMENT_START initalize port variable $BLOCK_COMMENT_END",
+            "const PORT = process.env.PORT || 5000",
+            "",
+            "$LINE_COMMENT initalize json middleware to accept json",
+            "app.use(express.json())",
+            "",
+            "$BLOCK_COMMENT_START @route: '/'",
+            "@desc: initial home route that responds with 'Hello World!",
+            "@method: GET",
+            "$BLOCK_COMMENT_END",
+            "app.get('/', (req, res, next) => {",
+            "\tres.send('<h1>Hello World!</h1>')",
+            "})",
+            "$0",
+            "$LINE_COMMENT Start server",
+            "app.listen(PORT, () => {",
+            "\tconsole.log('Server started on port ' + PORT)",
+            "})"
+        ],
+        "description": "A snippet to create a node express app boiler-plate"
+    },
+    "Express Routes Boilerplate file": {
+        "prefix": "expro",
+        "body": [
+            "const express = require('express')",
+            "const router = express.Router()",
+            "",
+            "$LINE_COMMENT start creating your routes",
+            "router.${1|use,get,post,put,delete|}('${2:path}', async (req, res, next) => {",
+            "$BLOCK_COMMENT_START",
+            "Start your code....",
+            "i.e: res.send(data)",
+            "$BLOCK_COMMENT_END",
+            "\t$0",
+            "})",
+            "",
+            "module.exports = router",
+            ""
+        ],
+        "description": "Snippet to create a express route file "
+    },
+    "Route response with try catch": {
+        "prefix": "xtca",
+        "body": ["try {",
+            "\tconst ${1:varname} = await ${2:response}($3)",
+            "\tif(!${1:varname}){",
+            "\t\tconst error = new Error(${4:errmsg})",
+            "\t\terror.statusCode = ${5|422,400,404,401,403|}",
+            "\t\terror.data = ${4:errmsg}",
+            "\t\tthrow error",
+            "\t}",
+            "\t$LINE_COMMENT continue with your code",
+            "\t$0",
+            "} catch(err) {",
+            "\tnext(err)",
+            "}"
+        ],
+        "description": "Route Snippet for try / catch / error handler "
+    },
+    "Small Route": {
+        "prefix": "xrs",
+        "body": [
+            "${1|app,route|}.${2|use,get,post,put,patch,delete|}('/${3:route}', async (req, res, next) => {",
+            "$BLOCK_COMMENT_START",
+            "Start your code....",
+            "i.e: res.send(data)",
+            "$BLOCK_COMMENT_END",
+            "\t$0",
+            "})",
+        ]
+    }
+
+}
